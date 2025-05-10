@@ -1,0 +1,410 @@
+/* Estilos base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilos do aplicativo de clima */
+.weather-app {
+  min-height: 100vh;
+  color: white;
+  transition: background-color 1s ease;
+  position: relative;
+}
+
+/* Fundos dinâmicos baseados no clima */
+.bg-sunny {
+  background: linear-gradient(to bottom, #4da0ff, #2e7bff);
+}
+
+.bg-cloudy {
+  background: linear-gradient(to bottom, #6ba4e5, #4a7dbe);
+}
+
+.bg-rainy {
+  background: linear-gradient(to bottom, #5c6670, #2c3e50);
+}
+
+.bg-snowy {
+  background: linear-gradient(to bottom, #e2e8f0, #b4c6e0);
+}
+
+.bg-night {
+  background: linear-gradient(to bottom, #0f172a, #1e293b);
+}
+
+/* Container principal */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  position: relative;
+  z-index: 10;
+}
+
+/* Elementos de fundo decorativos */
+.background-elements {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.rain-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.raindrop {
+  position: absolute;
+  opacity: 0.7;
+  animation-name: rainfall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rainfall {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.sun-effect {
+  position: absolute;
+  top: 20px;
+  right: -80px;
+  width: 256px;
+  height: 256px;
+  border-radius: 50%;
+  background-color: rgba(255, 204, 0, 0.2);
+  filter: blur(30px);
+  animation: pulse 4s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.15;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 0.25;
+    transform: scale(1.05);
+  }
+}
+
+.cloud-container {
+  position: absolute;
+  inset: 0;
+}
+
+.cloud-element {
+  position: absolute;
+  opacity: 0.3;
+}
+
+/* Barra de pesquisa */
+.search-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 1rem;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.button {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Card */
+.card {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+/* Clima atual */
+.current-weather-card {
+  margin-bottom: 2rem;
+}
+
+.current-weather-content {
+  padding: 1.5rem;
+  position: relative;
+}
+
+.current-weather-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 160px;
+  height: 160px;
+  opacity: 0.1;
+}
+
+.current-weather-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .current-weather-info {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.location-info {
+  flex: 1;
+}
+
+.city-name {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.country-name {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1.5rem;
+}
+
+.temperature-display {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.temperature {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.condition {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.weather-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 3rem;
+}
+
+.weather-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.detail-icon,
+.detail-icon-text {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #93c5fd;
+  font-size: 0.75rem;
+}
+
+.detail-label {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.875rem;
+}
+
+.detail-value {
+  font-weight: 500;
+}
+
+/* Tabs */
+.tabs {
+  width: 100%;
+}
+
+.tabs-list {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.tabs-trigger {
+  flex: 1;
+  padding: 0.75rem;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.tabs-trigger.active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Previsão por hora */
+.hourly-forecast-scroll {
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.hourly-forecast-items {
+  display: flex;
+  gap: 1rem;
+  min-width: max-content;
+}
+
+.hourly-forecast-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem;
+  min-width: 80px;
+}
+
+.hour-time {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.hour-icon {
+  margin-bottom: 0.5rem;
+}
+
+.hour-temp {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+/* Previsão diária */
+.daily-forecast-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.daily-forecast-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.daily-forecast-item:last-child {
+  border-bottom: none;
+}
+
+.day-name {
+  width: 6rem;
+}
+
+.day-name .today {
+  font-weight: bold;
+}
+
+.day-condition {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 7rem;
+}
+
+.condition-text {
+  font-size: 0.875rem;
+}
+
+.day-temperature {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.min-temp {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.max-temp {
+  font-weight: 500;
+}
+
+.temp-bar-container {
+  width: 5rem;
+  height: 0.25rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.temp-bar-fill {
+  height: 100%;
+  background-color: white;
+  border-radius: 9999px;
+}
+
+/* Responsividade */
+@media (max-width: 640px) {
+  .weather-details {
+    grid-template-columns: 1fr;
+  }
+
+  .day-condition {
+    width: auto;
+  }
+
+  .condition-text {
+    display: none;
+  }
+}
